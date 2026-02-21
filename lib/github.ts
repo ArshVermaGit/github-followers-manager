@@ -1,78 +1,142 @@
 import axios from "axios";
-import type { GitHubUser } from "@/types";
+import { GitHubUser } from "@/types/github";
 
-const GITHUB_API = "https://api.github.com";
+export class GitHubAPIError extends Error {
+  status: number;
+  retryAfter?: number;
 
-function createClient(accessToken: string) {
+  constructor(message: string, status: number, retryAfter?: number) {
+    super(message);
+    this.name = "GitHubAPIError";
+    this.status = status;
+    this.retryAfter = retryAfter;
+  }
+}
+
+export function createGitHubClient(accessToken: string) {
   return axios.create({
-    baseURL: GITHUB_API,
+    baseURL: "https://api.github.com",
     headers: {
       Authorization: `Bearer ${accessToken}`,
       Accept: "application/vnd.github.v3+json",
+      "X-GitHub-Api-Version": "2022-11-28",
     },
   });
 }
 
-export async function getFollowers(
-  accessToken: string,
-  page = 1,
-  perPage = 100
-): Promise<GitHubUser[]> {
-  const client = createClient(accessToken);
-  const { data } = await client.get<GitHubUser[]>(
-    `/user/followers?page=${page}&per_page=${perPage}`
-  );
-  return data;
+// Internal helper to handle rate limits, auth errors, and transient 5xx retries
+async function executeWithRetry<T>(requestFn: () => Promise<T>): Promise<T> {
+  const MAX_RETRIES = 2;
+  let attempt = 0;
+
+  while (attempt <= MAX_RETRIES) {
+    try {
+      return await requestFn();
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const { status, headers, data } = error.response;
+        
+        // Handle rate limits (403 or 429)
+        if (
+          (status === 403 && headers["x-ratelimit-remaining"] === "0") ||
+          status === 429
+        ) {
+          const resetTimeStr = headers["x-ratelimit-reset"];
+          const retryAfterHeader = String(headers["retry-after"] || "");
+          
+          let retryAfter = 60; // default 60 seconds
+          
+          if (retryAfterHeader) {
+            const parsed = parseInt(retryAfterHeader, 10);
+            if (!isNaN(parsed)) retryAfter = parsed;
+          } else if (resetTimeStr) {
+            const resetTime = parseInt(String(resetTimeStr), 10);
+            if (!isNaN(resetTime)) {
+              retryAfter = Math.max(0, resetTime - Math.floor(Date.now() / 1000));
+            }
+          }
+
+          throw new GitHubAPIError("GitHub API rate limit exceeded.", status, retryAfter);
+        }
+
+        // Handle Auth errors
+        if (status === 401) {
+          throw new GitHubAPIError("GitHub API authentication failed. Invalid or expired token.", status);
+        }
+
+        // Retry on 5xx transient errors
+        if (status >= 500 && status < 600 && attempt < MAX_RETRIES) {
+          attempt++;
+          // Exponential backoff: 1s, 2s
+          const backoff = Math.pow(2, attempt - 1) * 1000;
+          await new Promise((resolve) => setTimeout(resolve, backoff));
+          continue;
+        }
+
+        throw new GitHubAPIError(
+          data?.message || "GitHub API request failed",
+          status
+        );
+      }
+      throw error;
+    }
+  }
+  throw new Error("Unreachable");
 }
 
-export async function getFollowing(
-  accessToken: string,
-  page = 1,
-  perPage = 100
-): Promise<GitHubUser[]> {
-  const client = createClient(accessToken);
-  const { data } = await client.get<GitHubUser[]>(
-    `/user/following?page=${page}&per_page=${perPage}`
-  );
-  return data;
-}
-
-export async function unfollowUser(
-  accessToken: string,
-  username: string
-): Promise<void> {
-  const client = createClient(accessToken);
-  await client.delete(`/user/following/${username}`);
-}
-
-export async function getAllFollowers(
-  accessToken: string
-): Promise<GitHubUser[]> {
-  const all: GitHubUser[] = [];
+async function fetchAllPages(token: string, endpoint: string): Promise<GitHubUser[]> {
+  const client = createGitHubClient(token);
   let page = 1;
-  let batch: GitHubUser[];
+  let allUsers: GitHubUser[] = [];
+  let hasMore = true;
 
-  do {
-    batch = await getFollowers(accessToken, page);
-    all.push(...batch);
-    page++;
-  } while (batch.length === 100);
+  while (hasMore) {
+    const response = await executeWithRetry(() =>
+      client.get<GitHubUser[]>(endpoint, {
+        params: { per_page: 100, page },
+      })
+    );
 
-  return all;
+    allUsers = allUsers.concat(response.data);
+
+    if (response.data.length < 100) {
+      hasMore = false;
+    } else {
+      page++;
+    }
+  }
+
+  return allUsers;
 }
 
-export async function getAllFollowing(
-  accessToken: string
-): Promise<GitHubUser[]> {
-  const all: GitHubUser[] = [];
-  let page = 1;
-  let batch: GitHubUser[];
+export async function fetchAllFollowers(token: string): Promise<GitHubUser[]> {
+  return fetchAllPages(token, "/user/followers");
+}
 
-  do {
-    batch = await getFollowing(accessToken, page);
-    all.push(...batch);
-    page++;
-  } while (batch.length === 100);
+export async function fetchAllFollowing(token: string): Promise<GitHubUser[]> {
+  return fetchAllPages(token, "/user/following");
+}
 
-  return all;
+export function getNotFollowingBack(followers: GitHubUser[], following: GitHubUser[]): GitHubUser[] {
+  const followerLogins = new Set(followers.map((f) => f.login.toLowerCase()));
+  return following.filter((user) => !followerLogins.has(user.login.toLowerCase()));
+}
+
+export async function unfollowUser(token: string, username: string): Promise<void> {
+  const client = createGitHubClient(token);
+  try {
+    await executeWithRetry(() => client.delete(`/user/following/${username}`));
+  } catch (error) {
+    if (error instanceof GitHubAPIError) {
+      error.message = `Failed to unfollow ${username}: ${error.message}`;
+      throw error;
+    }
+    throw new Error(`Failed to unfollow ${username}`);
+  }
+}
+
+export async function getAuthenticatedUser(token: string): Promise<GitHubUser> {
+  const client = createGitHubClient(token);
+  const response = await executeWithRetry(() => client.get<GitHubUser>("/user"));
+  return response.data;
 }
