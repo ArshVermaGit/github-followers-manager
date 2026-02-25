@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Twitter, Linkedin, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +10,10 @@ export const Footer: React.FC = () => {
       <div className="footer-content">
         <div className="footer-info">
           <div className="footer-brand">
-            <h3 className="gradient-text">GitHub Follow Manager</h3>
+            <div className="footer-logo-row">
+              <img src="/logo.png" alt="Logo" width={28} height={28} />
+              <h3 className="gradient-text">GitHub Follow Manager</h3>
+            </div>
             <p className="footer-tagline">Built for developers who care about their GitHub social presence.</p>
           </div>
           <div className="footer-socials">
@@ -18,7 +21,7 @@ export const Footer: React.FC = () => {
               <Twitter size={20} />
             </a>
             <a href="https://github.com/ArshVermaGit" target="_blank" rel="noreferrer" aria-label="GitHub">
-              <Github size={20} />
+              <img src="/logo.png" alt="GitHub" width={20} height={20} />
             </a>
             <a href="https://www.linkedin.com/in/arshvermadev/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
               <Linkedin size={20} />
@@ -68,7 +71,7 @@ export const Footer: React.FC = () => {
             rel="noreferrer" 
             className="footer-repo-link"
           >
-            <Github size={16} />
+            <img src="/logo.png" alt="Repo" width={16} height={16} />
           </a>
           <p className="footer-credit">Built with ❤️ by <strong>Arsh Verma</strong></p>
         </div>
