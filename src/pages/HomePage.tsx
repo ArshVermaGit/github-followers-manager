@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { Header } from '../components/layout/Header';
-import { AuthSection } from '../sections/dashboard/AuthSection';
-import { StatsSection } from '../sections/dashboard/StatsSection';
-import { ManagerTabs } from '../sections/dashboard/ManagerTabs';
-import { UserItem } from '../sections/dashboard/UserItem';
-import { BulkStatusBar } from '../sections/dashboard/BulkStatusBar';
+import { AuthSection } from '../components/dashboard/AuthSection';
+import { StatsSection } from '../components/dashboard/StatsSection';
+import { ManagerTabs } from '../components/dashboard/ManagerTabs';
+import { UserItem } from '../components/dashboard/UserItem';
+import { BulkStatusBar } from '../components/dashboard/BulkStatusBar';
 import { useGitHubManager } from '../hooks/useGitHubManager';
 import { Filter, SortAsc } from 'lucide-react';
 import { UserItemSkeleton, StatCardSkeleton } from '../components/ui/Skeleton';

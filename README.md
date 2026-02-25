@@ -5,18 +5,16 @@
 [![Vite](https://img.shields.io/badge/Vite-6-purple.svg)](https://vitejs.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**GitHub Follow Manager** is a professional, high-performance tool designed to help developers manage their social relationships on GitHub. Analyze followers, identify non-mutual connections, and manage your network with a premium, animated dashboard.
-
-![Dashboard Preview](https://via.placeholder.com/1200x600/0c0c0c/ffffff?text=GitHub+Follow+Manager+v2.0)
+**GitHub Follow Manager** is a professional, high-performance tool I built to help developers manage their social connections on GitHub. It lets you analyze your followers, find who isn't following you back, and clean up your network with a sleek, automated dashboard.
 
 ## ✨ Features
 
-- ⚡ **Lightning Fast**: Built with Vite 6 and React 18 for near-instant analysis.
-- 💎 **Premium UI**: Dark-mode monochrome aesthetic with glassmorphism and smooth Framer Motion animations.
-- 🛡️ **Privacy First**: Everything runs in your browser. Tokens are stored in `localStorage` and never touch a private server.
-- 📊 **Deep Insights**: View detailed profiles, repository counts, and account age within the app.
-- 📦 **Bulk Actions**: Unfollow non-followers or follow back fans in one click with intelligent rate-limit tracking.
-- 🚦 **Rate Limit Monitoring**: Real-time status bar for GitHub API usage.
+- ⚡ **Lightning Fast**: Built with Vite 6 and React 18 for instant analysis.
+- 💎 **Premium UI**: A clean, monochrome design with smooth animations.
+- 🛡️ **Privacy First**: Everything runs right in your browser. Your tokens stay on your machine and never touch a private server.
+- 📊 **Deep Insights**: See full profiles, repo counts, and account age without leaving the app.
+- 📦 **Bulk Actions**: Unfollow non-mutuals or follow back fans in one click.
+- 🚦 **Rate Limit Savvy**: Real-time monitoring keeps you within GitHub's API limits.
 
 ## 🚀 Quick Start
 
@@ -24,7 +22,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/github-nonfollowers-cleaner.git
+git clone https://github.com/ArshVermaGit/github-nonfollowers-cleaner.git
 
 # Enter the project
 cd github-nonfollowers-cleaner
@@ -38,38 +36,34 @@ npm run dev
 
 ### Usage
 
-1. Generate a **GitHub Personal Access Token (Classic)**.
-2. Ensure it has `read:user` and `user:follow` permissions.
-3. Paste the token into the app along with your username.
+1. Grab a **GitHub Personal Access Token (Classic)**.
+2. Make sure it has `read:user` and `user:follow` permissions.
+3. Paste the token and your username into the app.
 4. Hit **Fetch & Analyze**.
 
 ## 🏗️ Architecture
 
-The project follows a modular Atomic Design pattern:
+The project is built with a focus on clean, modular code:
 
 ```mermaid
 graph TD
     A[App.tsx] --> B[Router]
     B --> C[HomePage]
-    B --> D[SettingsPage]
-    B --> E[AboutPage]
     C --> F[useGitHubManager Hook]
     F --> G[GitHubService]
     G --> H[GitHub API]
-    C --> I[Modular Dashboard Sections]
-    I --> J[Atomic UI Components]
+    C --> I[Dashboard Components]
+    I --> J[Atomic UI Library]
 ```
 
 ## 🤝 Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+I love seeing the community get involved. If you have an idea for a feature or find a bug, feel free to open a PR or an issue. Check out [CONTRIBUTING.md](CONTRIBUTING.md) to see how to get started.
 
 ## 📄 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+This project is licensed under the MIT License. See `LICENSE` for details.
 
 ---
 
-Built with ❤️ by [Arsh Verma](https://github.com/arshverma)
+Built with ❤️ by [Arsh Verma](https://github.com/ArshVermaGit)

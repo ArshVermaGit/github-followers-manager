@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Play, Square, Loader2 } from 'lucide-react';
-import { Card } from '../../components/ui/Card';
-import { Button } from '../../components/ui/Button';
+import { Card } from '../ui/Card';
+import { Button } from '../ui/Button';
 
 interface BulkStatusBarProps {
   current: number;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, UserCheck, UserMinus, Heart, Zap } from 'lucide-react';
-import { Card } from '../../components/ui/Card';
+import { Card } from '../ui/Card';
 import type { AppStats } from '../../types/github';
 
 export const StatsSection: React.FC<AppStats> = ({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Github, Settings, Info, LayoutDashboard } from 'lucide-react';
+import { Github, LayoutDashboard } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { RateLimitTracker } from './RateLimitTracker';
@@ -10,8 +10,6 @@ export const Header: React.FC = () => {
 
   const navItems = [
     { label: 'Dashboard', path: '/', icon: LayoutDashboard },
-    { label: 'Settings', path: '/settings', icon: Settings },
-    { label: 'About', path: '/about', icon: Info },
   ];
 
   return (
@@ -22,7 +20,7 @@ export const Header: React.FC = () => {
         </Link>
         <div className="header-text">
           <h1 className="gradient-text">GitHub Follow Manager</h1>
-          <p>Clean your profile. Analyze relationships. Scale your reach.</p>
+          <p>The professional way to manage your GitHub network.</p>
         </div>
       </div>
 
@@ -50,7 +48,6 @@ export const Header: React.FC = () => {
         <div className="version-pill">
           <RateLimitTracker />
           <div className="status-dot animate-pulse" />
-          v2.0 PRO
         </div>
       </nav>
     </header>
