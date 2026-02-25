@@ -1,49 +1,67 @@
-# 🚀 GitHub Follow Manager
+# <img src="public/logo.png" width="32" height="32" /> GitHub Follow Manager
 
-[![React](https://img.shields.io/badge/React-18-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-6-purple.svg)](https://vitejs.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+<div align="center">
+  <p><strong>Auditing connections. Purifying networks. Professional-grade social management.</strong></p>
+  
+  [![React](https://img.shields.io/badge/React-19-black?style=for-the-badge&logo=react)](https://reactjs.org/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5-black?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+  [![Vite](https://img.shields.io/badge/Vite-7-black?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+  [![License](https://img.shields.io/badge/License-MIT-black?style=for-the-badge)](LICENSE)
+</div>
 
-**GitHub Follow Manager** is a professional, high-performance tool I built to help developers manage their social connections on GitHub. It lets you analyze your followers, find who isn't following you back, and clean up your network with a sleek, automated dashboard.
+---
 
-## ✨ Features
+## 🎭 The Vision
 
-- ⚡ **Lightning Fast**: Built with Vite 6 and React 18 for instant analysis.
-- 💎 **Premium UI**: A clean, monochrome design with smooth animations.
-- 🛡️ **Privacy First**: Everything runs right in your browser. Your tokens stay on your machine and never touch a private server.
-- 📊 **Deep Insights**: See full profiles, repo counts, and account age without leaving the app.
-- 📦 **Bulk Actions**: Unfollow non-mutuals or follow back fans in one click.
-- 🚦 **Rate Limit Savvy**: Real-time monitoring keeps you within GitHub's API limits.
+Social connections on GitHub are more than just numbers—they are a developer's professional graph. **GitHub Follow Manager** was born from a need for a tool that respects that graph. No bloated features, no dark patterns, and absolutely **no data harvesting**.
 
-## 🚀 Quick Start
+This is a premium, monochrome dashboard designed for developers who value their social presence as much as their code quality.
 
-### Installation
+## 💎 Crafted Features
+
+- ⚡ **Atomic Performance**: Engineered with Vite 7 and React 19 for a dashboard that feels instant and alive.
+- 🛡️ **Zero-Target Privacy**: Your data belongs to you. Every analysis, every token, and every interaction stays 100% local in your browser.
+- 🎨 **Executive Aesthetic**: A world-class monochrome design system built with custom CSS and Framer Motion for high-fidelity interactions.
+- 📦 **Bulk Orchestration**: Effortlessly unfollow non-mutuals or follow back your fans with real-time status orchestration.
+- 🌡️ **Rate-Limit Intelligence**: Reactive monitoring that visualizes your GitHub API consumption in real-time.
+
+## 🛠️ The Stack
+
+- **Framework**: [React 19](https://react.dev/)
+- **Runtime**: [Vite 7](https://vitejs.dev/)
+- **Logic**: TypeScript + Axios
+- **Motion**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Styling**: Pure CSS Design System
+
+## 🚀 Deployment
+
+### Local Development
+
+Enter the ecosystem in seconds:
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/ArshVermaGit/github-nonfollowers-cleaner.git
 
-# Enter the project
+# 2. Access the directory
 cd github-nonfollowers-cleaner
 
-# Install dependencies
+# 3. Install the environment
 npm install
 
-# Start development server
+# 4. Launch the dashboard
 npm run dev
 ```
 
-### Usage
+### Authorization
 
-1. Grab a **GitHub Personal Access Token (Classic)**.
-2. Make sure it has `read:user` and `user:follow` permissions.
-3. Paste the token and your username into the app.
-4. Hit **Fetch & Analyze**.
+To interact with your graph, you'll need a [Personal Access Token (Classic)](https://github.com/settings/tokens).
+Required scopes: `read:user`, `user:follow`.
 
 ## 🏗️ Architecture
 
-The project is built with a focus on clean, modular code:
+A clean, modular engine powering the experience:
 
 ```mermaid
 graph TD
@@ -54,16 +72,28 @@ graph TD
     G --> H[GitHub API]
     C --> I[Dashboard Components]
     I --> J[Atomic UI Library]
+    style A fill:#000,stroke:#fff,stroke-width:2px,color:#fff
+    style G fill:#000,stroke:#fff,stroke-width:2px,color:#fff
+    style H fill:#333,stroke:#fff,stroke-width:2px,color:#fff
 ```
 
-## 🤝 Contributing
+## 🤝 Join the Evolution
 
-I love seeing the community get involved. If you have an idea for a feature or find a bug, feel free to open a PR or an issue. Check out [CONTRIBUTING.md](CONTRIBUTING.md) to see how to get started.
+I built this as a professional tool for the community. If you find a bug or have a vision for a new feature, your contributions are welcome.
 
-## 📄 License
-
-This project is licensed under the MIT License. See `LICENSE` for details.
+1. Fork the project.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
 
 ---
 
-Built with ❤️ by [Arsh Verma](https://github.com/ArshVermaGit)
+<div align="center">
+  <p>Built with ❤️ by <strong>Arsh Verma</strong></p>
+  <p>
+    <a href="https://github.com/ArshVermaGit">GitHub</a> • 
+    <a href="https://www.linkedin.com/in/arshvermadev/">LinkedIn</a> • 
+    <a href="https://x.com/TheArshVerma">X</a>
+  </p>
+</div>
