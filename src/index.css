@@ -286,6 +286,17 @@ button {
   color: var(--text-primary);
 }
 
+.help-text {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.help-text a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* Progress */
 .progress-container {
   margin-top: 2rem;
@@ -308,6 +319,13 @@ button {
   box-shadow: 0 0 10px var(--accent-blue-glow);
 }
 
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
 .progress-label {
   font-size: 12px;
   color: var(--text-secondary);
@@ -317,17 +335,40 @@ button {
   gap: 0.5rem;
 }
 
-/* Stats */
+.progress-percent {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+/* Stat Card */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 1rem;
   margin-bottom: 3rem;
 }
 
 .stat-card {
-  padding: 2rem 1.5rem;
+  padding: 1.75rem 1.25rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.stat-icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
 }
 
 .stat-value {
@@ -335,7 +376,7 @@ button {
   font-weight: 700;
   font-family: var(--font-mono);
   letter-spacing: -0.05em;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.125rem;
 }
 
 .stat-name {
@@ -344,6 +385,136 @@ button {
   letter-spacing: 0.2em;
   color: var(--text-tertiary);
   font-weight: 700;
+}
+
+/* Bulk Status */
+.bulk-status-container {
+  margin-bottom: 2.5rem;
+}
+
+.bulk-bar {
+  padding: 1.5rem;
+  border-color: rgba(255, 255, 255, 0.05);
+  background: rgba(10, 10, 10, 0.6);
+}
+
+.bulk-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (max-width: 640px) {
+  .bulk-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+}
+
+.bulk-main {
+  flex: 1;
+}
+
+.bulk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.bulk-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bulk-title h3 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+}
+
+.bulk-counter {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.bulk-progress-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bulk-progress-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.bulk-progress-fill.unfollow {
+  background: var(--accent-red);
+  box-shadow: 0 0 10px var(--accent-red-glow);
+}
+
+.bulk-progress-fill.follow {
+  background: var(--accent-green);
+  box-shadow: 0 0 10px var(--accent-green-glow);
+}
+
+.bulk-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.bulk-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+}
+
+.bulk-btn.stop {
+  background: #111;
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.bulk-btn.stop:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.bulk-btn.start.unfollow {
+  background-color: var(--accent-red);
+  color: white;
+}
+
+.bulk-btn.start.follow {
+  background-color: var(--accent-green);
+  color: black;
+}
+
+.bulk-btn.start:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.bulk-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
 }
 
 /* Tabs */
