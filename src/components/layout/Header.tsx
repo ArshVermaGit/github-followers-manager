@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Github, LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { RateLimitTracker } from './RateLimitTracker';
@@ -16,7 +16,7 @@ export const Header: React.FC = () => {
     <header className="header-container">
       <div className="logo-group">
         <Link to="/" className="logo-box">
-          <Github size={32} />
+          <img src="/logo.png" alt="GitHub Follow Manager Logo" width={32} height={32} />
         </Link>
         <div className="header-text">
           <h1 className="gradient-text">GitHub Follow Manager</h1>
