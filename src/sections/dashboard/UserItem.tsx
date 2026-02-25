@@ -1,14 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Check, XCircle } from 'lucide-react';
+import { ExternalLink, Check, XCircle, Search } from 'lucide-react';
 import { Card } from '../../components/ui/Card';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
 import type { UserWithState } from '../../types/github';
+import { clsx } from 'clsx';
 
 interface UserItemProps {
   user: UserWithState;
   onAction: (login: string) => void;
+  onViewProfile?: (login: string) => void;
   actionLabel: string;
   badgeLabel: string;
   badgeType: 'danger' | 'success';
@@ -18,6 +20,7 @@ interface UserItemProps {
 export const UserItem: React.FC<UserItemProps> = ({
   user,
   onAction,
+  onViewProfile,
   actionLabel,
   badgeLabel,
   badgeType,
@@ -33,21 +36,26 @@ export const UserItem: React.FC<UserItemProps> = ({
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: Math.min(index * 0.05, 0.5) }}
     >
-      <Card className={clsx("user-item-card", isDone && "done")}>
-        <div className="user-avatar-wrap">
+      <Card className={clsx("user-item-card", isDone && "done")} noHover={isDone}>
+        <div className="user-avatar-wrap" onClick={() => onViewProfile?.(user.login)} style={{ cursor: 'pointer' }}>
           <img src={`${user.avatar_url}&s=80`} alt={user.login} className="user-avatar" loading="lazy" />
+          <div className="avatar-overlay">
+             <Search size={14} />
+          </div>
         </div>
 
         <div className="user-details">
-          <a 
-            href={user.html_url} 
-            target="_blank" 
-            rel="noreferrer" 
-            className="user-login-link"
-          >
-            @{user.login}
-            <ExternalLink size={12} />
-          </a>
+          <div className="user-login-row">
+            <a 
+              href={user.html_url} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="user-login-link"
+            >
+              @{user.login}
+              <ExternalLink size={12} />
+            </a>
+          </div>
           {user.name && <div className="user-full-name">{user.name}</div>}
         </div>
 
@@ -71,6 +79,3 @@ export const UserItem: React.FC<UserItemProps> = ({
     </motion.div>
   );
 };
-
-// Helper for conditional classes since clsx is in atomic components but not here
-import { clsx } from 'clsx';
