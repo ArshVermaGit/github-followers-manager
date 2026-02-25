@@ -100,13 +100,15 @@ I am building a community of developers who value clean code and social privacy.
 2. **Quality**: Ensure 100% TypeScript coverage.
 3. **Privacy**: Never introduce third-party analytics.
 
----
+## 📱 Connect with Me
+
+I'd love to hear your feedback or discuss potential collaborations!
 
 <div align="center">
-  <p>Architected with ❤️ by <strong>Arsh Verma</strong></p>
-  <p>
-    <a href="https://github.com/ArshVermaGit">GitHub</a> • 
-    <a href="https://www.linkedin.com/in/arshvermadev/">LinkedIn</a> • 
-    <a href="https://x.com/TheArshVerma">X</a>
-  </p>
+
+[![GitHub](https://skillicons.dev/icons?i=github)](https://github.com/ArshVermaGit)
+[![LinkedIn](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/arshvermadev/)
+[![Twitter](https://skillicons.dev/icons?i=twitter)](https://x.com/TheArshVerma)
+[![Gmail](https://skillicons.dev/icons?i=gmail)](mailto:arshverma.dev@gmail.com)
+
 </div>
