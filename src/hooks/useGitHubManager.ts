@@ -1,19 +1,6 @@
 import { useState, useCallback } from 'react';
 import { GitHubService } from '../services/github';
-import type { GitHubUser } from '../services/github';
-
-export type UserState = 'idle' | 'loading' | 'done' | 'error';
-
-export interface UserWithState extends GitHubUser {
-  state: UserState;
-}
-
-export interface BulkStatus {
-  active: boolean;
-  current: number;
-  total: number;
-  stopped: boolean;
-}
+import type { GitHubUser, UserWithState, UserState, BulkStatus } from '../types/github';
 
 export const useGitHubManager = () => {
   const [following, setFollowing] = useState<GitHubUser[]>([]);
@@ -106,7 +93,7 @@ export const useGitHubManager = () => {
       updateList(prev => prev.map(u => u.login === login ? { ...u, state: 'error' } : u));
       const errMsg = err instanceof Error ? err.message : String(err);
       setError(`Failed to ${action} ${login}: ${errMsg}`);
-      throw err; // Re-throw for bulk action to catch if needed
+      throw err;
     }
   }, []);
 
@@ -121,7 +108,6 @@ export const useGitHubManager = () => {
     setBulkStatus({ active: true, current: 0, total: pending.length, stopped: false });
 
     for (let i = 0; i < pending.length; i++) {
-      // Check if stopped in a closure-safe way
       let isStopped = false;
       setBulkStatus(prev => {
         if (prev.stopped) isStopped = true;
@@ -134,11 +120,9 @@ export const useGitHubManager = () => {
       try {
         await handleAction(token, pending[i].login, action, type);
       } catch (e) {
-        // Continue bulk even if one fails
         console.error('Bulk item failed', e);
       }
       
-      // Delay to respect rate limits
       await new Promise(r => setTimeout(r, 700));
     }
 
