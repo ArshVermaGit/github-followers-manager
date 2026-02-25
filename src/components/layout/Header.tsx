@@ -1,55 +1,26 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { clsx } from 'clsx';
+import { Link } from 'react-router-dom';
 import { RateLimitTracker } from './RateLimitTracker';
 
 export const Header: React.FC = () => {
-  const location = useLocation();
-
-  const navItems = [
-    { label: 'Dashboard', path: '/', icon: LayoutDashboard },
-  ];
-
   return (
     <header className="header-container">
-      <div className="logo-group">
-        <Link to="/" className="logo-box">
-          <img src="/logo.png" alt="GitHub Follow Manager Logo" width={32} height={32} />
-        </Link>
+      <Link to="/" className="logo-group">
+        <div className="logo-box">
+          <img src="/logo.png" alt="GitHub Follow Manager Logo" width={40} height={40} />
+        </div>
         <div className="header-text">
           <h1 className="gradient-text">GitHub Follow Manager</h1>
-          <p>The professional way to manage your GitHub network.</p>
+          <p>Professional GitHub Network Management</p>
         </div>
-      </div>
+      </Link>
 
-      <nav className="header-nav">
-        {navItems.map((item) => (
-          <Link 
-            key={item.path} 
-            to={item.path}
-            className={clsx(
-              "nav-link",
-              location.pathname === item.path && "active"
-            )}
-          >
-            <item.icon size={18} />
-            <span>{item.label}</span>
-            {location.pathname === item.path && (
-              <motion.div 
-                layoutId="nav-pill"
-                className="nav-active-pill"
-                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-              />
-            )}
-          </Link>
-        ))}
+      <div className="header-nav">
         <div className="version-pill">
           <RateLimitTracker />
           <div className="status-dot animate-pulse" />
         </div>
-      </nav>
+      </div>
     </header>
   );
 };

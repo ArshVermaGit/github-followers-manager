@@ -15,8 +15,8 @@ export const StatsSection: React.FC<AppStats> = ({
     { label: 'Following', value: following, color: 'var(--accent-blue)', icon: Users },
     { label: 'Followers', value: followers, color: '#a855f7', icon: UserCheck },
     { label: 'Mutual', value: mutual, color: 'var(--accent-green)', icon: Zap },
-    { label: 'Not Following', value: nonMutual, color: 'var(--accent-red)', icon: UserMinus },
     { label: 'Fans', value: fans, color: '#f59e0b', icon: Heart },
+    { label: 'Not Following', value: nonMutual, color: 'var(--accent-red)', icon: UserMinus },
   ];
 
   return (
@@ -24,13 +24,14 @@ export const StatsSection: React.FC<AppStats> = ({
       {stats.map((stat, idx) => (
         <motion.div
           key={stat.label}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: idx * 0.08, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: idx * 0.05, ease: "easeOut" }}
+          style={{ height: '100%' }}
         >
           <Card className="stat-card" noHover>
             <div className="stat-icon-wrap" style={{ color: stat.color }}>
-              <stat.icon size={14} />
+              <stat.icon size={16} />
             </div>
             <div className="stat-value" style={{ color: stat.color }}>
               {stat.value.toLocaleString() || '0'}

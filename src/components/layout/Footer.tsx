@@ -10,11 +10,11 @@ export const Footer: React.FC = () => {
       <div className="footer-content">
         <div className="footer-info">
           <div className="footer-brand">
-            <div className="footer-logo-row">
-              <img src="/logo.png" alt="Logo" width={28} height={28} />
+            <Link to="/" className="footer-logo-row">
+              <img src="/logo.png" alt="Logo" width={32} height={32} />
               <h3 className="gradient-text">GitHub Follow Manager</h3>
-            </div>
-            <p className="footer-tagline">Built for developers who care about their GitHub social presence.</p>
+            </Link>
+            <p className="footer-tagline">The premium platform for managing your GitHub social network with precision and ease.</p>
           </div>
           <div className="footer-socials">
             <a href="https://x.com/TheArshVerma" target="_blank" rel="noreferrer" aria-label="X (Twitter)">
@@ -34,14 +34,15 @@ export const Footer: React.FC = () => {
 
         <div className="footer-grid">
           <div className="footer-col">
-            <h4>Product</h4>
+            <h4>Application</h4>
             <ul>
               <li><Link to="/features">Features</Link></li>
               <li><Link to="/how-it-works">How It Works</Link></li>
+              <li><Link to="/changelog">Changelog</Link></li>
             </ul>
           </div>
           <div className="footer-col">
-            <h4>Legal</h4>
+            <h4>Legal & Privacy</h4>
             <ul>
               <li><Link to="/privacy">Privacy Policy</Link></li>
               <li><Link to="/terms">Terms of Service</Link></li>
@@ -50,12 +51,11 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
           <div className="footer-col">
-            <h4>Company</h4>
+            <h4>Support</h4>
             <ul>
               <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/support">Support</Link></li>
+              <li><Link to="/support">Help Center</Link></li>
               <li><Link to="/faq">FAQ</Link></li>
-              <li><Link to="/changelog">Changelog</Link></li>
               <li><Link to="/sitemap">Sitemap</Link></li>
             </ul>
           </div>
@@ -71,14 +71,14 @@ export const Footer: React.FC = () => {
             rel="noreferrer" 
             className="footer-repo-link"
           >
-            <img src="/logo.png" alt="Repo" width={16} height={16} />
+             <img src="/logo.png" alt="Repo" width={18} height={18} />
           </a>
-          <p className="footer-credit">Built with ❤️ by <strong>Arsh Verma</strong></p>
+          <p className="footer-credit">Crafted by <strong>Arsh Verma</strong></p>
         </div>
         
         <div className="footer-badge">
            <div className="badge-dot" />
-           <span>Processing 100% locally in your browser</span>
+           <span>100% Client-Side Processing</span>
         </div>
       </div>
     </footer>

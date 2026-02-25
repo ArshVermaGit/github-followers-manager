@@ -3,6 +3,7 @@ import { Eye, EyeOff, Search, RotateCcw } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { motion } from 'framer-motion';
 
 interface AuthSectionProps {
   onAnalyze: (token: string, username: string) => void;
@@ -56,7 +57,7 @@ export const AuthSection: React.FC<AuthSectionProps> = ({
                 type="button" 
                 onClick={() => setShowToken(!showToken)}
               >
-                {showToken ? <EyeOff size={16} /> : <Eye size={16} />}
+                {showToken ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             }
           />
@@ -76,8 +77,9 @@ export const AuthSection: React.FC<AuthSectionProps> = ({
             type="submit" 
             loading={isLoading}
             disabled={!token || !username}
+            className="btn-primary"
           >
-            {!isLoading && <Search size={16} />}
+            {!isLoading && <Search size={18} />}
             Fetch & Analyze
           </Button>
           
@@ -86,8 +88,9 @@ export const AuthSection: React.FC<AuthSectionProps> = ({
             variant="ghost"
             onClick={handleReset}
             disabled={isLoading}
+            className="btn-ghost"
           >
-            <RotateCcw size={16} />
+            <RotateCcw size={18} />
             Reset
           </Button>
         </div>
@@ -96,10 +99,12 @@ export const AuthSection: React.FC<AuthSectionProps> = ({
       {progress > 0 && (
         <div className="progress-container">
           <div className="progress-track">
-            <div 
+            <motion.div 
               className="progress-fill" 
-              style={{ width: `${progress}%` }}
-            ></div>
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.5 }}
+            ></motion.div>
           </div>
           <div className="progress-info">
              <p className="progress-label">{progressLabel}</p>

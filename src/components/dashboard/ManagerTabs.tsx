@@ -24,8 +24,8 @@ export const ManagerTabs: React.FC<ManagerTabsProps> = ({
           activeTab === 'nonMutual' && "active-tab danger"
         )}
       >
-        <UserMinus size={18} />
-        <span>Unfollow Non-Followers</span>
+        <UserMinus size={20} />
+        <span>Non-Followers</span>
         <span className="tab-badge">{nonMutualCount}</span>
       </button>
 
@@ -36,8 +36,8 @@ export const ManagerTabs: React.FC<ManagerTabsProps> = ({
           activeTab === 'fans' && "active-tab success"
         )}
       >
-        <UserPlus size={18} />
-        <span>Follow Back Fans</span>
+        <UserPlus size={20} />
+        <span>Fans</span>
         <span className="tab-badge">{fansCount}</span>
       </button>
     </div>
