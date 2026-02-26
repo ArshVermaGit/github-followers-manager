@@ -64,7 +64,7 @@ export const BulkStatusBar: React.FC<BulkStatusBarProps> = ({
                 className="bulk-btn start"
               >
                 <Play size={14} fill="currentColor" />
-                Start All
+                {type === 'unfollow' ? 'Unfollow All' : 'Follow All'}
               </Button>
             )}
           </div>
