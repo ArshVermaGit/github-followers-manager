@@ -507,6 +507,26 @@ button {
 
 .active-tab.danger { border-color: hsla(0, 100%, 65%, 0.2); }
 .active-tab.success { border-color: hsla(160, 100%, 45%, 0.2); }
+.active-tab.primary { border-color: hsla(210, 100%, 50%, 0.2); }
+
+/* Search Custom Styles */
+.search-bar-form input {
+    background-color: hsla(0, 0%, 0%, 0.5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: var(--font-sans);
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.search-bar-form input:focus {
+    border-color: var(--accent-blue);
+    background-color: hsla(0, 0%, 4%, 0.8);
+    box-shadow: 0 0 0 4px var(--accent-blue-glow);
+}
 
 /* User List */
 .user-list {
@@ -654,6 +674,49 @@ button {
 .action-btn-pill {
     padding: 0.8rem 1.5rem;
     border-radius: var(--radius-full);
+    font-weight: 700;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action-btn-pill.success {
+    background: var(--accent-green);
+    color: var(--bg);
+    box-shadow: 0 0 20px var(--accent-green-glow);
+}
+
+.action-btn-pill.success:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px var(--accent-green-glow);
+    filter: brightness(1.1);
+}
+
+.action-btn-pill.danger {
+    background: var(--accent-red);
+    color: var(--bg);
+    box-shadow: 0 0 20px var(--accent-red-glow);
+}
+
+.action-btn-pill.danger:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px var(--accent-red-glow);
+    filter: brightness(1.1);
+}
+
+.action-btn-pill:disabled {
+    opacity: 0.5;
+    background: var(--surface-hover);
+    color: var(--text-tertiary);
+    border: 1px solid var(--border);
+    box-shadow: none;
+    cursor: not-allowed;
 }
 
 /* Footer */
