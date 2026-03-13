@@ -109,5 +109,4 @@ export const useFollowersSearch = (token: string) => {
     handleBulkFollow,
     stopBulkFollow
   };
-  };
 };
