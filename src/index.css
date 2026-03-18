@@ -1,37 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg: hsl(240, 10%, 2%);
-  --surface: hsl(240, 10%, 5%);
-  --surface-hover: hsl(240, 10%, 8%);
-  --border: hsl(240, 5%, 12%);
-  --border-active: hsl(240, 5%, 18%);
+  /* Modern Premium Palette - Deep Indigo & Slate */
+  --bg: #050505;
+  --surface-low: #0a0a0a;
+  --surface: #111111;
+  --surface-high: #1c1c1c;
+  --surface-hover: #252525;
   
-  --accent-blue: hsl(210, 100%, 50%);
-  --accent-blue-glow: hsla(210, 100%, 50%, 0.15);
-  --accent-green: hsl(160, 100%, 45%);
-  --accent-green-glow: hsla(160, 100%, 45%, 0.15);
-  --accent-red: hsl(0, 100%, 65%);
-  --accent-red-glow: hsla(0, 100%, 65%, 0.1);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --border-active: rgba(255, 255, 255, 0.25);
   
-  --text-primary: hsl(0, 0%, 100%);
-  --text-secondary: hsl(240, 5%, 70%);
-  --text-tertiary: hsl(240, 5%, 40%);
+  /* Accents - Dynamic & Vibrant */
+  --accent-primary: #6366f1; /* Indigo 500 */
+  --accent-primary-glow: rgba(99, 102, 241, 0.4);
+  --accent-secondary: #06b6d4; /* Cyan 500 */
+  --accent-secondary-glow: rgba(6, 182, 212, 0.4);
+  --accent-success: #10b981; /* Emerald 500 */
+  --accent-success-glow: rgba(16, 185, 129, 0.4);
+  --accent-error: #ef4444; /* Red 500 */
+  --accent-error-glow: rgba(239, 68, 68, 0.4);
+  --accent-warning: #f59e0b; /* Amber 500 */
   
-  --font-mono: 'IBM Plex Mono', monospace;
-  --font-sans: 'Outfit', sans-serif;
+  /* Text - High Contrast & Hierarchy */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa; /* Zinc 400 */
+  --text-tertiary: #52525b; /* Zinc 600 */
+  --text-inverse: #000000;
   
-  --glass: hsla(0, 0%, 100%, 0.02);
-  --glass-border: hsla(0, 0%, 100%, 0.05);
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  /* Effects */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-blur: 20px;
+  
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
   --radius-full: 9999px;
   
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+  /* Shadows */
+  --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+  --shadow-premium: 0 0 50px -12px rgba(99, 102, 241, 0.25);
 }
 
 * {
@@ -42,28 +61,36 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
   background-color: var(--bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
+  line-height: 1.6;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
-body::before {
-  content: '';
-  position: fixed; 
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
-  background-size: 32px 32px;
-  opacity: 0.4;
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
   pointer-events: none;
-  z-index: -1;
+  z-index: 1000;
 }
 
 a {
