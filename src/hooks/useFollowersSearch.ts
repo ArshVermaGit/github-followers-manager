@@ -24,27 +24,33 @@ export const useFollowersSearch = (token: string) => {
 
     setIsSearching(true);
     setError(null);
-    setSearchProgress(0);
-    setSearchProgressLabel(`Searching for ${username}...`);
+    setSearchProgress(1);
+    setSearchProgressLabel(`Locating @${username} on the network...`);
     setFollowers([]);
 
     const service = new GitHubService(token);
 
     try {
       const followersList = await service.getFollowers(username, (p, n) => {
-        setSearchProgress(Math.min(p * 10, 100));
-        setSearchProgressLabel(`Fetching followers... page ${p} (${n} users)`);
+        setSearchProgress(Math.min(5 + p * 15, 95));
+        setSearchProgressLabel(`Extracting followers... ${n} connections found`);
       });
 
       const listWithState = followersList.map(u => ({ ...u, state: 'idle' as UserState }));
       setFollowers(listWithState);
       setSearchProgress(100);
-      setSearchProgressLabel(`Loaded ${followersList.length} followers of ${username}`);
-      toast.success(`Search completed for ${username}`);
+      setSearchProgressLabel(`${followersList.length} followers of @${username} synchronized`);
+      
+      setTimeout(() => {
+        setSearchProgress(0);
+        setSearchProgressLabel('');
+      }, 3000);
+
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'An error occurred during search');
+      const msg = err instanceof Error ? err.message : 'Search operation failed';
+      setError(msg);
       setSearchProgress(0);
-      toast.error('Search failed');
+      toast.error(msg);
     } finally {
       setIsSearching(false);
     }
@@ -61,8 +67,6 @@ export const useFollowersSearch = (token: string) => {
       setFollowers(prev => prev.map(u => u.login === login ? { ...u, state: 'done' } : u));
     } catch (err: unknown) {
       setFollowers(prev => prev.map(u => u.login === login ? { ...u, state: 'error' } : u));
-      const errMsg = err instanceof Error ? err.message : String(err);
-      setError(`Failed to follow ${login}: ${errMsg}`);
       throw err;
     }
   }, [token]);
@@ -82,11 +86,10 @@ export const useFollowersSearch = (token: string) => {
       try {
         await handleFollowAction(pending[i].login);
       } catch (err) {
-        console.error('Follow action failed', err);
-        toast.error(`Failed to follow ${pending[i].login}`);
+        console.error('Action failed for bulk item', err);
       }
       
-      await new Promise(r => setTimeout(r, 700));
+      await new Promise(r => setTimeout(r, 800));
     }
 
     setBulkStatus(prev => ({ ...prev, active: false, stopped: isStoppedRef.current }));
