@@ -23,9 +23,15 @@ export class GitHubService {
       // Extract rate limits
       const remaining = response.headers['x-ratelimit-remaining'];
       const limit = response.headers['x-ratelimit-limit'];
+      const reset = response.headers['x-ratelimit-reset'];
+      
       if (remaining) {
         window.dispatchEvent(new CustomEvent('gh-rate-limit', { 
-          detail: { remaining: parseInt(remaining), limit: parseInt(limit) } 
+          detail: { 
+            remaining: parseInt(remaining), 
+            limit: parseInt(limit),
+            reset: parseInt(reset)
+          } 
         }));
       }
 
@@ -62,8 +68,8 @@ export class GitHubService {
       out = out.concat(batch);
       if (batch.length < 100) break;
       page++;
-      // Rate limiting/sleep from original
-      await new Promise(r => setTimeout(r, 120));
+      // Optimized delay to stay under standard rate limits while remaining fast
+      await new Promise(r => setTimeout(r, 100));
     }
     return out;
   }
