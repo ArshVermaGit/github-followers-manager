@@ -19,13 +19,20 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <div className="form-group">
-      {label && <label>{label}</label>}
-      <div className="input-wrapper">
+      {label && <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-tertiary mb-2 block">{label}</label>}
+      <div className="input-wrapper relative group">
         <input 
-          className={cn("", className)} 
+          className={cn(
+            "w-full bg-black/30 border border-white/10 rounded-xl px-5 py-3.5 text-white font-mono transition-all focus:border-accent/50 focus:bg-black/50 focus:shadow-[0_0_20px_rgba(99,102,241,0.15)] outline-none",
+            className
+          )} 
           {...props} 
         />
-        {icon && <div className="input-icon-btn">{icon}</div>}
+        {icon && (
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-tertiary group-hover:text-secondary transition-colors">
+            {icon}
+          </div>
+        )}
       </div>
     </div>
   );
