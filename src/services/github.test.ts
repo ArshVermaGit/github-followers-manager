@@ -14,7 +14,8 @@ describe('GitHubService', () => {
   });
 
   it('should format headers correctly', async () => {
-    (axios as any).mockResolvedValue({ data: [], headers: {} });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(axios).mockResolvedValue({ data: [], headers: {} } as any);
     
     await service.getFollowing('user');
     
@@ -28,7 +29,7 @@ describe('GitHubService', () => {
 
   it('should throw descriptive error on rate limit', async () => {
     const resetTime = Math.floor(Date.now() / 1000) + 3600;
-    (axios as any).mockRejectedValue({
+    vi.mocked(axios).mockRejectedValue({
       isAxiosError: true,
       response: {
         status: 403,
@@ -40,19 +41,21 @@ describe('GitHubService', () => {
     });
 
     // Mock axios.isAxiosError
-    (axios as any).isAxiosError = vi.fn().mockReturnValue(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(axios).isAxiosError = vi.fn().mockReturnValue(true) as any;
 
     await expect(service.getFollowing('user')).rejects.toThrow(/GitHub Rate Limit Exceeded/);
   });
 
   it('should throw descriptive error on invalid token', async () => {
-    (axios as any).mockRejectedValue({
+    vi.mocked(axios).mockRejectedValue({
       isAxiosError: true,
       response: {
         status: 401
       }
     });
-    (axios as any).isAxiosError = vi.fn().mockReturnValue(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(axios).isAxiosError = vi.fn().mockReturnValue(true) as any;
 
     await expect(service.getFollowing('user')).rejects.toThrow(/Invalid GitHub token/);
   });
