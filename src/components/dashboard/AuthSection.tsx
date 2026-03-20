@@ -20,21 +20,21 @@ export const AuthSection: React.FC<AuthSectionProps> = ({
   progress, 
   progressLabel 
 }) => {
-  const [token, setToken] = useState(() => localStorage.getItem('gh_token') || '');
+  const [token, setToken] = useState(() => sessionStorage.getItem('gh_token') || '');
   const [username, setUsername] = useState(() => localStorage.getItem('gh_user') || '');
   const [showToken, setShowToken] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (token && username) {
-      localStorage.setItem('gh_token', token.trim());
+      sessionStorage.setItem('gh_token', token.trim());
       localStorage.setItem('gh_user', username.trim());
       onAnalyze(token.trim(), username.trim());
     }
   };
 
   const handleReset = () => {
-    localStorage.removeItem('gh_token');
+    sessionStorage.removeItem('gh_token');
     localStorage.removeItem('gh_user');
     setToken('');
     setUsername('');
